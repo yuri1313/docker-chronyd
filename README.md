@@ -13,9 +13,9 @@ Architectures officially supported by this Docker container:
 
 ## About this container
 
-[![Docker Build Status](https://img.shields.io/docker/build/cturra/ntp.svg)](https://hub.docker.com/r/cturra/ntp/)
-[![Docker Pulls](https://img.shields.io/docker/pulls/cturra/ntp.svg)](https://hub.docker.com/r/cturra/ntp/)
-[![Apache licensed](https://img.shields.io/badge/license-Apache-blue.svg)](https://raw.githubusercontent.com/cturra/docker-ntp/master/LICENSE)
+[![Docker Build Status](https://img.shields.io/docker/build/simonrupf/chronyd.svg)](https://hub.docker.com/r/simonrupf/chronyd/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/simonrupf/chronyd.svg)](https://hub.docker.com/r/simonrupf/chronyd/)
+[![Apache licensed](https://img.shields.io/badge/license-Apache-blue.svg)](https://raw.githubusercontent.com/simonrupf/docker-chronyd/master/LICENSE)
 
 This container runs [chrony](https://chrony.tuxfamily.org/) on [Alpine Linux](https://alpinelinux.org/). More about chrony can be found at:
 
@@ -30,7 +30,7 @@ Pull and run -- it's this simple.
 
 ```
 # pull from docker hub
-$> docker pull cturra/ntp
+$> docker pull simonrupf/chronyd
 
 # run ntp
 $> docker run --name=ntp             \
@@ -38,7 +38,7 @@ $> docker run --name=ntp             \
               --detach=true          \
               --publish=123:123/udp  \
               --read-only            \
-              cturra/ntp
+              simonrupf/chronyd
 ```
 
 
@@ -49,7 +49,7 @@ Using the docker-compose.yml file included in this git repo, you can build the c
 
 ```
 # pull from docker hub
-$> docker pull cturra/ntp
+$> docker pull simonrupf/chronyd
 
 # build ntp
 $> docker-compose build ntp
