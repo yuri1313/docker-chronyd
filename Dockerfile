@@ -1,4 +1,4 @@
-FROM alpine:3.12.1
+FROM alpine:3.13
 
 # install chrony
 RUN apk add --no-cache chrony && \
