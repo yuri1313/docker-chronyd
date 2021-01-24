@@ -13,7 +13,5 @@ EXPOSE 123/udp
 # let docker know how to test container health
 HEALTHCHECK CMD chronyc tracking || exit 1
 
-VOLUME /etc/chrony /run/chrony /var/lib/chrony
-
 # start chronyd in the foreground
 ENTRYPOINT [ "/opt/startup.sh" ]
