@@ -1,5 +1,12 @@
 FROM alpine:3.13
 
+ARG BUILD_DATE
+
+# first, a bit about this container
+LABEL build_info="simonrupf/chronyd build-date:- ${BUILD_DATE}"
+LABEL maintainer="Simon Rupf <simon@rupf.net>"
+LABEL documentation="https://github.com/simonrupf/docker-chronyd"
+
 # install chrony
 RUN apk add --no-cache chrony && \
     rm /etc/chrony/chrony.conf

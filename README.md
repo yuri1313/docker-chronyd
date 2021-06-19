@@ -1,30 +1,31 @@
-## Supported Architectures:
-
-Architectures officially supported by this Docker container:
-
-![Linux x86-64](https://img.shields.io/badge/linux/amd64-yellowgreen)
-![ARMv8 64-bit](https://img.shields.io/badge/linux/arm64-yellowgreen)
-![IBM POWER8](https://img.shields.io/badge/linux/ppc64le-yellowgreen)
-![IBM Z Systems](https://img.shields.io/badge/linux/s390x-yellowgreen)
-![Linux x86/i686](https://img.shields.io/badge/linux/386-yellowgreen)
-![ARMv7 32-bit](https://img.shields.io/badge/linux/arm/v7-yellowgreen)
-![ARMv6 32-bit](https://img.shields.io/badge/linux/arm/v6-yellowgreen)
-
-
 ## About this container
 
-[![Docker Build Status](https://img.shields.io/docker/build/simonrupf/chronyd.svg)](https://hub.docker.com/r/simonrupf/chronyd/)
-[![Docker Pulls](https://img.shields.io/docker/pulls/simonrupf/chronyd.svg)](https://hub.docker.com/r/simonrupf/chronyd/)
-[![Apache licensed](https://img.shields.io/badge/license-Apache-blue.svg)](https://raw.githubusercontent.com/simonrupf/docker-chronyd/master/LICENSE)
+[![Docker Pulls](https://img.shields.io/docker/pulls/simonrupf/chronyd.svg?logo=docker&label=pulls&style=for-the-badge&color=0099ff&logoColor=ffffff)](https://hub.docker.com/r/simonrupf/chronyd/)
+[![Docker Stars](https://img.shields.io/docker/stars/simonrupf/chronyd.svg?logo=docker&label=stars&style=for-the-badge&color=0099ff&logoColor=ffffff)](https://hub.docker.com/r/simonrupf/chronyd/)
+[![GitHub Stars](https://img.shields.io/github/stars/simonrupf/docker-chronyd.svg?logo=github&label=stars&style=for-the-badge&color=0099ff&logoColor=ffffff)](https://github.com/simonrupf/docker-chronyd)
+[![Apache licensed](https://img.shields.io/badge/license-Apache-blue.svg?logo=apache&style=for-the-badge&color=0099ff&logoColor=ffffff)](https://raw.githubusercontent.com/simonrupf/docker-chronyd/master/LICENSE)
 
-This container runs [chrony](https://chrony.tuxfamily.org/) on [Alpine Linux](https://alpinelinux.org/). More about chrony can be found at:
+This container runs [chrony](https://chrony.tuxfamily.org/) on [Alpine Linux](https://alpinelinux.org/).
 
- * https://chrony.tuxfamily.org/
+[chrony](https://chrony.tuxfamily.org) is a versatile implementation of the Network Time Protocol (NTP). It can synchronise the system clock with NTP servers, reference clocks (e.g. GPS receiver), and manual input using wristwatch and keyboard. It can also operate as an NTPv4 (RFC 5905) server and peer to provide a time service to other computers in the network.
+
+
+## Supported Architectures
+
+Architectures officially supported by this Docker container. Simply pulling this container from [Docker Hub](https://hub.docker.com/r/simonrupf/chronyd/) should retrieve the correct image for your architecture.
+
+![Linux x86-64](https://img.shields.io/badge/linux/amd64-green?style=flat-square)
+![ARMv8 64-bit](https://img.shields.io/badge/linux/arm64-green?style=flat-square)
+![IBM POWER8](https://img.shields.io/badge/linux/ppc64le-green?style=flat-square)
+![IBM Z Systems](https://img.shields.io/badge/linux/s390x-green?style=flat-square)
+![Linux x86/i686](https://img.shields.io/badge/linux/386-green?style=flat-squareg)
+![ARMv7 32-bit](https://img.shields.io/badge/linux/arm/v7-green?style=flat-square)
+![ARMv6 32-bit](https://img.shields.io/badge/linux/arm/v6-green?style=flat-square)
 
 
 ## How to Run this container
 
-### Running from Docker Hub
+### With the Docker CLI
 
 Pull and run -- it's this simple.
 
@@ -37,7 +38,6 @@ $> docker run --name=ntp            \
               --restart=always      \
               --detach              \
               --publish=123:123/udp \
-              --cap-add=SYS_TIME    \
               simonrupf/chronyd
 
 # OR run ntp with higher security (default behaviour of run.sh and docker-compose).
@@ -45,7 +45,6 @@ $> docker run --name=ntp                           \
               --restart=always                     \
               --detach                             \
               --publish=123:123/udp                \
-              --cap-add=SYS_TIME                   \
               --read-only                          \
               --tmpfs=/etc/chrony:rw,mode=1750     \
               --tmpfs=/run/chrony:rw,mode=1750     \
@@ -54,7 +53,7 @@ $> docker run --name=ntp                           \
 ```
 
 
-### Building and Running with Docker Compose
+### With Docker Compose
 
 Using the docker-compose.yml file included in this git repo, you can build the container yourself (should you choose to).
 *Note: this docker-compose files uses the `3.4` compose format, which requires Docker Engine release 17.09.0+
@@ -74,7 +73,7 @@ $> docker-compose logs ntp
 ```
 
 
-### Building and Running with Docker Engine
+### From a CLI
 
 Using the vars file in this git repo, you can update any of the variables to reflect your
 environment. Once updated, simply execute the build then run scripts.
@@ -112,6 +111,12 @@ NTP_SERVERS="time1.google.com,time2.google.com,time3.google.com,time4.google.com
 # alibaba
 NTP_SERVERS="ntp1.aliyun.com,ntp2.aliyun.com,ntp3.aliyun.com,ntp4.aliyun.com"
 ```
+
+If you're interested in a public list of stratum 1 servers, you can have a look at the following list.
+Do make sure to verify the ntp server is active as this list does appaer to have some no longer active
+servers.
+
+ * https://www.advtimesync.com/docs/manual/stratum1.html
 
 
 ## Testing your NTP Container
@@ -182,3 +187,24 @@ Name/IP Address            NP  NR  Span  Frequency  Freq Skew  Offset  Std Dev
 time.cloudflare.com        35  18  139m     +0.014      0.141   -662us   530us
 time1.google.com           33  13  128m     -0.007      0.138   +318us   460us
 ```
+
+
+Are you seeing messages like these and wondering what is going on?
+```
+$ docker logs -f ntps
+[...]
+2021-05-25T18:41:40Z System clock wrong by -2.535004 seconds
+2021-05-25T18:41:40Z Could not step system clock
+2021-05-25T18:42:47Z System clock wrong by -2.541034 seconds
+2021-05-25T18:42:47Z Could not step system clock
+```
+
+Good question! Since `chronyd` is running with the `-x` flag, it will not try to control
+the system (container host) clock. This of course is necessary because the process does not
+have priviledge (for good reason) to modify the clock on the system.
+
+Like any host on your network, simply use your preferred ntp client to pull the time from
+the running ntp container on your container host.
+
+---
+<a href="https://www.buymeacoffee.com/cturra" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-yellow.png" alt="Buy Me A Coffee" height="41" width="174"></a>
