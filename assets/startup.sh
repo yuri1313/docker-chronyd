@@ -66,6 +66,7 @@ done
   echo
   echo "driftfile /var/lib/chrony/chrony.drift"
   echo "makestep 0.1 3"
+  echo "ratelimit"
   echo "rtcsync"
   echo
   echo "allow all"
