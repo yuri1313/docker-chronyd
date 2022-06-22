@@ -66,8 +66,9 @@ done
   echo
   echo "driftfile /var/lib/chrony/chrony.drift"
   echo "makestep 0.1 3"
-  echo "ratelimit"
-  echo "rtcsync"
+  if [ -n "${NTP_DIRECTIVES}" ]; then
+    echo -e "${NTP_DIRECTIVES}"
+  fi
   echo
   echo "allow all"
 } >> ${CHRONY_CONF_FILE}
