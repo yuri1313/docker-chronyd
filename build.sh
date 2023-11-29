@@ -1,13 +1,5 @@
-#!/bin/bash
-
-# grab global variables
-source vars
-
-DOCKER=$(which docker)
-BUILD_DATE=$(date -u '+%Y-%m-%dT%H:%M:%S%z')
-
-# build image
-$DOCKER build --pull                               \
-              --tag ${IMAGE_NAME}                  \
-              --build-arg BUILD_DATE=${BUILD_DATE} \
-              .
+podman build -t ghcr.io/yuri1313/chronyd:v1 .
+podman tag ghcr.io/yuri1313/chronyd:v1 ghcr.io/yuri1313/chronyd:latest
+#podman login ghcr.io -u yuri1313 --password-stdin
+podman push ghcr.io/yuri1313/chronyd:v1
+podman push ghcr.io/yuri1313/chronyd:latest

@@ -1,11 +1,11 @@
-FROM alpine:3.18
+FROM alpine:latest
 
 ARG BUILD_DATE
 
 # first, a bit about this container
 LABEL org.opencontainers.image.created="${BUILD_DATE}" \
-      org.opencontainers.image.authors="Simon Rupf <simon@rupf.net>" \
-      org.opencontainers.image.documentation=https://github.com/simonrupf/docker-chronyd
+      org.opencontainers.image.authors="Yuri1313 <ampceo@gmail.com>" \
+      org.opencontainers.image.documentation=https://github.com/yuri1313/docker-chronyd
 
 # default configuration
 ENV NTP_DIRECTIVES="ratelimit\nrtcsync"
